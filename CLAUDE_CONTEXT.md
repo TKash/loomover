@@ -473,8 +473,31 @@ the CTA correctly routing to `/login`.
 
 ## 12. Current state / what's NOT done yet
 
-- **Not deployed anywhere.** Vercel is the intended target; no Vercel project
-  exists yet, no production env vars configured there.
+> **Update 2026-09-14 -- shipped to production.** Parts of this file predate it;
+> where they conflict, this block wins.
+> - Live at **https://loomover.vercel.app** (Vercel Hobby, GitHub repo
+>   `TKash/loomover`, branch `main` auto-deploys). Framework Preset had to be
+>   set to Next.js manually (import on an empty repo left it as "Other", which
+>   served only `public/` and 404'd every route). Deployment Protection is off.
+>   Production env vars are set in Vercel; `NEXT_PUBLIC_APP_URL` =
+>   `https://loomover.vercel.app`.
+> - Branded **Loomover**; `app/page.tsx` is a GSAP-animated marketing site with
+>   an inline phone sign-up form (`components/PhoneSignupForm.tsx`).
+> - **Login codes**: SMS to Indian numbers now fails (Twilio error 30008,
+>   carrier filtering -- no DLT). Decision: move OTP to **WhatsApp**.
+>   `lib/auth/otp-channel.ts` reads `NEXT_PUBLIC_OTP_CHANNEL` (`sms` now); flip
+>   to `whatsapp` once the Twilio Messaging Service has an approved WhatsApp
+>   Business sender (needs Twilio upgraded off Trial + Meta verification --
+>   user has NOT started this yet). Until then, testing uses a Supabase Test OTP:
+>   `+919958867473` / `123456`.
+> - **Reservation expiry** runs in Supabase via pg_cron every 15 min
+>   (`supabase/migrations/0004_expire_reservations_cron.sql`, applied). The
+>   Vercel cron was removed from `vercel.json` (Hobby rejects hourly crons).
+>   `/api/cron/expire-reservations` remains as a manual trigger and now rejects
+>   requests when `CRON_SECRET` is unset.
+> - Supabase free tier pauses after ~7 idle days (happened once already).
+
+- ~~Not deployed anywhere.~~ Deployed -- see the update above.
 - **Twilio is still a trial account.** SMS only reaches Caller-ID-verified
   numbers; the WhatsApp side is still the shared dev Sandbox (requires each
   new tester to send a "join <code>" message first) -- going to real outside
