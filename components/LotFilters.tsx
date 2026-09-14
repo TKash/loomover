@@ -18,11 +18,11 @@ export default function LotFilters() {
   }
 
   return (
-    <div className="mb-5 flex gap-3">
+    <div className="mb-5 flex w-full gap-3">
       <select
         defaultValue={searchParams.get('category') || ''}
         onChange={(e) => updateParam('category', e.target.value)}
-        className={inputClass}
+        className={`${inputClass} shrink-0`}
       >
         <option value="">All categories</option>
         {LOT_CATEGORIES.map((c) => (
@@ -36,7 +36,8 @@ export default function LotFilters() {
         placeholder="City"
         defaultValue={searchParams.get('location') || ''}
         onBlur={(e) => updateParam('location', e.target.value)}
-        className={inputClass}
+        // min-w-0 + flex-1: an input's default ~20ch width otherwise pushes the row past a phone screen.
+        className={`${inputClass} w-full min-w-0 flex-1`}
       />
     </div>
   )
