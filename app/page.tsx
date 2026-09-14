@@ -265,8 +265,10 @@ export default async function Home() {
         </StickyHeader>
 
         <section>
-          <Container className="grid gap-10 pb-16 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-16 lg:pb-24 lg:pt-10">
-            <div className="max-w-[640px]">
+          {/* grid-cols-1 (minmax(0,1fr)) rather than an implicit auto column: an auto column grows to
+              the form's min-content width and pushed the form and image off-screen on phones. */}
+          <Container className="grid grid-cols-1 gap-10 pb-16 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end lg:gap-16 lg:pb-24 lg:pt-10">
+            <div className="min-w-0 max-w-[640px]">
               <div data-hero="eyebrow" className={`${EYEBROW} ${ACCENT} mb-[22px]`}>
                 THE SURPLUS TEXTILE EXCHANGE
               </div>
@@ -289,7 +291,7 @@ export default async function Home() {
             </div>
             <div
               data-hero="media"
-              className="relative aspect-[4/3] overflow-hidden rounded-[18px] sm:aspect-[16/10] lg:aspect-[4/5]"
+              className="relative aspect-[4/3] min-w-0 overflow-hidden rounded-[18px] sm:aspect-[16/10] lg:aspect-[4/5]"
             >
               <div data-parallax className="absolute inset-x-0 -top-[8%] h-[116%]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -326,7 +328,7 @@ export default async function Home() {
         </div>
 
         <section className="bg-[#EDE7DA]">
-          <Container className={`grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] ${SECTION_Y}`}>
+          <Container className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] ${SECTION_Y}`}>
             <div>
               <div className={`font-plexmono text-[11px] tracking-[0.12em] ${ACCENT} mb-3.5`}>
                 BUILT FROM INSIDE THE TRADE
@@ -467,7 +469,7 @@ export default async function Home() {
         </section>
 
         <section>
-          <Container className="grid items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pb-24">
+          <Container className="grid grid-cols-1 items-center gap-10 pb-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:pb-24">
             <div className="relative aspect-[4/3] overflow-hidden rounded-[18px] lg:aspect-square">
               <ParallaxImage src="/marketing/workshop.jpg" alt="Rolling fabric in a textile workshop" />
             </div>
@@ -493,7 +495,7 @@ export default async function Home() {
         </section>
 
         <section id="faq" className="border-t border-[rgba(30,27,22,0.1)]">
-          <Container className={`grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 ${SECTION_Y}`}>
+          <Container className={`grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 ${SECTION_Y}`}>
             <h2 data-split className={H2}>
               Questions,
               <br />
